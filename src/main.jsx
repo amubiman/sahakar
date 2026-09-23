@@ -1,14 +1,12 @@
-// main.jsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom' // 👈 हे नवीन जोडले आहे
-import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { HashRouter } from 'react-router-dom' // 👈 HashRouter इंपोर्ट करा
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter> {/* 👈 App ला याच्या आत रॅप केले */}
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <HashRouter> {/* 👈 BrowserRouter ऐवजी HashRouter वापरा */}
       <App />
-    </BrowserRouter> {/* 👈 */}
-  </StrictMode>,
+    </HashRouter>
+  </React.StrictMode>,
 )
