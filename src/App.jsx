@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import Header from './Header'; // बँकेचा जुना हेडर [4]
+=======
+// App.jsx
+import React, { useEffect, useState } from 'react';
+import Header from './Header'; // 👈 १. इथे तुमचा Header कम्पोनंट इम्पोर्ट केला आहे
+>>>>>>> 52973713a3bfd55318116aaa7e38ee527b7929d6
 
 function App() {
   const [bankData, setBankData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+<<<<<<< HEAD
   const [tenantName, setTenantName] = useState(null); // 🟢 टेनंटचे नाव स्टोर करण्यासाठी
 
   useEffect(() => {
@@ -16,10 +23,20 @@ function App() {
     // 🟢 जर टेनंट नसेल, तर लोड स्क्रीन बंद करा आणि मुख्य लँडिंग पेज दाखवा [4]
     if (!tenant) {
       setTenantName(null);
+=======
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tenant = urlParams.get('tenant'); 
+
+    if (!tenant) {
+      setError("कृपया URL मध्ये योग्य बँकेचा आयडी टाका. उदा. ?tenant=janata");
+>>>>>>> 52973713a3bfd55318116aaa7e38ee527b7929d6
       setLoading(false);
       return;
     }
 
+<<<<<<< HEAD
     setTenantName(tenant);
   
     async function fetchBank() {
@@ -29,12 +46,26 @@ function App() {
           setBankData({ 
             bank_name: "जनता सहकारी बँक", 
             primary_color: "#f68b1e", // भगवा/नारंगी रंग [4]
+=======
+    async function fetchBank() {
+      try {
+        // डेटाबेसमधून येणारा तात्पुरता डेटा
+        if (tenant === 'janata') {
+          setBankData({ 
+            bank_name: "जनता सहकारी बँक", 
+            primary_color: "#f68b1e", // भगवा/नारंगी रंग
+>>>>>>> 52973713a3bfd55318116aaa7e38ee527b7929d6
             secondary_color: "#003366" 
           });
         } else if (tenant === 'maharashtra') {
           setBankData({ 
+<<<<<<< HEAD
             bank_name: "बँक ऑफ操作 महाराष्ट्र", 
             primary_color: "#003366", // गडद निळा रंग [4]
+=======
+            bank_name: "बँक ऑफ महाराष्ट्र", 
+            primary_color: "#003366", // गडद निळा रंग
+>>>>>>> 52973713a3bfd55318116aaa7e38ee527b7929d6
             secondary_color: "#ffcc00" 
           });
         } else {
@@ -50,6 +81,7 @@ function App() {
     fetchBank();
   }, []);
 
+<<<<<<< HEAD
   // 🟢 बँकेचा रंग संपूर्ण सिस्टीमला अप्लाय करण्याचा ब्लॉक [4]
   useEffect(() => {
     if (bankData?.primary_color) {
@@ -144,6 +176,40 @@ function App() {
       <div style={{ maxWidth: '1200px', margin: '30px auto', padding: '0 20px' }}>
         <h3>मुख्य सेवा आणि सुविधा</h3> [4]
         <p>डेटाबेसमधील फिचर फ्लॅग्ज (Feature Flags) नुसार इथे माहिती दाखवली जाईल.</p> [4]
+=======
+  // 👈 २. हा नवीन ब्लॉक बँकेचा रंग संपूर्ण सिस्टीमला (CSS ला) अप्लाय करेल
+  useEffect(() => {
+    if (bankData?.primary_color) {
+      document.documentElement.style.setProperty('--primary-color', bankData.primary_color);
+    }
+  }, [bankData]);
+
+  if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>बँकेची वेबसाईट लोड होत आहे...</div>;
+  if (error) return <div style={{ padding: '20px', color: 'red', textAlign: 'center' }}>त्रुटी: {error}</div>;
+
+  return (
+    <div style={{ backgroundColor: '#f4f5f7', minHeight: '100vh' }}>
+      
+      {/* App.jsx मधील ओळ क्रमांक ६४ च्या आसपास असा बदल करा */}
+      <Header bankName={bankData?.bank_name} />
+
+      {/* 📊 बँकेचा मुख्य बॅनर (Hero Section) */}
+      <div style={{ 
+        backgroundColor: 'var(--primary-color)', // 👈 डेटाबेसचा रंग इथे अप्लाय होईल
+        padding: '80px 20px', 
+        color: '#ffffff',
+        textAlign: 'center',
+        transition: 'background-color 0.3s ease' // रंग बदलताना स्मूथ दिसेल
+      }}>
+        <h1 style={{ color: '#ffffff', fontSize: '40px', margin: 0 }}>{bankData?.bank_name}</h1>
+        <p style={{ fontSize: '18px', marginTop: '10px' }}>तुमचे डिजिटल बँकिंग पोर्टलवर स्वागत आहे.</p>
+      </div>
+
+      {/* 💡 इथे खाली तुम्ही तुमचे पुढील कॅल्क्युलेटर किंवा इतर डिझाईन बनवू शकता */}
+      <div style={{ maxWidth: '1200px', margin: '30px auto', padding: '0 20px' }}>
+        <h3>मुख्य सेवा आणि सुविधा</h3>
+        <p>डेटाबेसमधील फिचर फ्लॅग्ज (Feature Flags) नुसार इथे माहिती दाखवली जाईल.</p>
+>>>>>>> 52973713a3bfd55318116aaa7e38ee527b7929d6
       </div>
 
     </div>
